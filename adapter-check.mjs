@@ -1,0 +1,13 @@
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=readFileSync('dist/sections.js','utf8');
+const adapter=source.slice(source.indexOf('async function submitEnquiry'),source.indexOf('let submitting=false;'));
+const context={config:{contactEndpoint:''},AbortController,setTimeout,clearTimeout,fetch:async()=>({ok:true})};
+vm.createContext(context);vm.runInContext(adapter+'\nthis.submit=submitEnquiry;',context);
+await assert.rejects(context.submit({}),/has not been sent/);
+context.config.contactEndpoint='https://example.com/test';
+assert.equal(await context.submit({name:'Test'}),true);
+context.fetch=async()=>({ok:false});await assert.rejects(context.submit({}),/couldn’t send/);
+context.fetch=async()=>{throw new Error('Network unavailable')};await assert.rejects(context.submit({}),/Network unavailable/);
+console.log('PASS: unconfigured endpoint, successful acceptance, server rejection, network failure');
