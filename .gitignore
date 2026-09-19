@@ -1,7 +1,9 @@
 .sites-runtime/
 node_modules/
+.next/
 .env
 .env.*
 !.env.example
+.vercel/
 *.zip
 *.tar.gz

@@ -1,13 +1,17 @@
 {
   "name": "evangel-learning-institute",
-  "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "node server.mjs",
-    "start": "node server.mjs",
-    "check": "node --check dist/app.js && node --check dist/config.js && node --check dist/sections.js",
-    "build": "node build.mjs",
-    "preview": "node server.mjs"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preview": "next start",
+    "check": "node --check public/app.js && node --check public/config.js && node --check public/sections.js"
+  },
+  "dependencies": {
+    "next": "14.2.30",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   }
 }
