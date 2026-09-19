@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
-    "check": "node --check dist/app.js && node --check dist/config.js && node --check dist/sections.js"
+    "check": "node --check dist/app.js && node --check dist/config.js && node --check dist/sections.js",
+    "build": "node build.mjs",
+    "preview": "node server.mjs"
   }
 }
